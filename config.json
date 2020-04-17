@@ -1,0 +1,13 @@
+{
+    "ColorTime": 6000,
+    "StatusTime": 15000,
+    "StatusType": ["PLAYING","STREAMING","LISTENING","WATCHING"],
+    "StatusInformation": ["use some cool magic to change color","Konosuba"],
+    "ChangeColorMessage": "changing role color... >.O",
+    "StopMessage": "oh no role stoped changing color >.<",
+    "DeniedAccessMessage": "aww man you dont have that role to use command :<",
+    "RainbowRole": "Rainbow",
+    "AllowedRole": "VIP",
+    "Prefix": "z!" ,
+    "Token": "your bot token"
+}
