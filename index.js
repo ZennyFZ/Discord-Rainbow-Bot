@@ -12,13 +12,11 @@ Bot.on("ready", () => {
 Bot.on("message", message => {
 
   function ChangeColor() {
-    Bot.guilds.forEach(arole => {
-      var role =arole.roles.find('name', Config.RainbowRole)
+      var role = message.guild.roles.cache.find(r => r.name === Config.RainbowRole)
       if (role) {
         role.edit({color : "RANDOM"})
       }
-    })
-  }
+    }
 
   function ChangeStatus() {
     let activityTypes = Config.StatusType
@@ -29,20 +27,22 @@ Bot.on("message", message => {
   }
 
  if (message.content.toLowerCase().startsWith(Prefix + ' start')) {
-   if(message.member.roles.find("name", Config.AllowedRole)) {
+   if (message.member.roles.cache.some(role => role.name === Config.AllowedRole)) {
      Color = setInterval(ChangeColor, Config.ColorTime)
      Status = setInterval(ChangeStatus, Config.StatusTime)
      message.channel.send(Config.ChangeColorMessage)
-   }
-   else {
+   } else {
      message.channel.send(Config.DeniedAccessMessage)
    }
- } else if (message.content.toLowerCase().startsWith(Prefix + ' stop')) {
-   if(message.member.roles.find("name", Config.AllowedRole)) {
-   clearInterval(Color)
-   clearInterval(Status)
-   message.channel.send(Config.StopMessage)
- } else {
-   message.channel.send(Config.DeniedAccessMessage)
  }
-}})
+
+ if (message.content.toLowerCase().startsWith(Prefix + ' stop')) {
+   if (message.member.roles.cache.some(role => role.name === Config.AllowedRole)) {
+     clearInterval(Color)
+     clearInterval(Status)
+     message.channel.send(Config.StopMessage)
+   } else {
+     message.channel.send(Config.DeniedAccessMessage)
+   }
+ }
+})
